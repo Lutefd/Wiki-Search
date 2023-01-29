@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import reactLogo from './assets/react.svg';
 import './App.css';
 import { useDebounce } from './useDebounce';
+import Item from './Item';
 
 function App() {
   const [search, setSearch] = useState('');
@@ -41,13 +42,8 @@ function App() {
       ></input>
       <h1>Vite + React</h1>
       <div className="card">
-        {data.map((item: any) => {
-          return (
-            <div key={item.pageid}>
-              <h2>{item.title}</h2>
-              <p dangerouslySetInnerHTML={{ __html: item.snippet }}></p>
-            </div>
-          );
+        {data.map((item: any, key) => {
+          return <Item key={key} {...item} />;
         })}
       </div>
     </div>
