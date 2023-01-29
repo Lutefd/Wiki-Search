@@ -9,7 +9,7 @@ function App() {
   const [search, setSearch] = useState('');
   const [page, setPage] = useState(0);
   const { searchDebounced } = useDebounce(search, 500);
-  const url = `https://en.wikipedia.org/w/api.php?action=query&list=search&srlimit=20&format=json&origin=*&srsearch=${searchDebounced}}`;
+  const url = `https://en.wikipedia.org/w/api.php?action=query&list=search&srlimit=100&format=json&origin=*&srsearch=${searchDebounced}}`;
   const [data, setData] = useState([]);
   const [amountOfPages, setAmountOfPages] = useState(0);
   const fetchData = async () => {
