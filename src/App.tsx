@@ -1,27 +1,27 @@
 import { useState, useEffect } from 'react';
 import reactLogo from './assets/react.svg';
 import './App.css';
+import { useDebounce } from './useDebounce';
 
 function App() {
-  const [search, setSearch] = useState<string>(``);
-  const url = `https://en.wikipedia.org/w/api.php?action=query&list=search&srlimit=20&format=json&origin=*&srsearch=${search}}`;
+  const [search, setSearch] = useState('');
+  const { searchDebounced } = useDebounce(search, 500);
+
+  const url = `https://en.wikipedia.org/w/api.php?action=query&list=search&srlimit=20&format=json&origin=*&srsearch=${searchDebounced}}`;
   const [data, setData] = useState<any>([]);
   const fetchData = async () => {
     fetch(url)
       .then((res) => res.json())
       .then((data) => {
         setData(data.query.search);
-        console.log(search);
       });
   };
   useEffect(() => {
-    if (search !== '') fetchData();
-  }, [search]);
+    if (searchDebounced !== '') fetchData();
+  }, [searchDebounced]);
 
-  const handleChange = (e: string) => {
-    setTimeout(() => {
-      setSearch(e);
-    }, 500);
+  const handleChange = (e: string, delay: number) => {
+    setSearch(e);
   };
   return (
     <div className="App">
@@ -35,7 +35,7 @@ function App() {
       </div>
       <input
         onChange={(e) => {
-          if (e !== undefined) handleChange(e.target.value);
+          if (e !== undefined) handleChange(e.target.value, 500);
         }}
       ></input>
       <h1>Vite + React</h1>
