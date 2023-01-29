@@ -8,7 +8,7 @@ function App() {
   const { searchDebounced } = useDebounce(search, 500);
 
   const url = `https://en.wikipedia.org/w/api.php?action=query&list=search&srlimit=20&format=json&origin=*&srsearch=${searchDebounced}}`;
-  const [data, setData] = useState<any>([]);
+  const [data, setData] = useState([]);
   const fetchData = async () => {
     fetch(url)
       .then((res) => res.json())
@@ -17,7 +17,8 @@ function App() {
       });
   };
   useEffect(() => {
-    if (searchDebounced !== '') fetchData();
+    if (searchDebounced == '') return;
+    fetchData();
   }, [searchDebounced]);
 
   const handleChange = (e: string, delay: number) => {
