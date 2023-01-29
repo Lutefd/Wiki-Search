@@ -45,7 +45,7 @@ function App() {
           return (
             <div key={item.pageid}>
               <h2>{item.title}</h2>
-              <p>{item.snippet}</p>
+              <p dangerouslySetInnerHTML={{ __html: item.snippet }}></p>
             </div>
           );
         })}
