@@ -3,7 +3,7 @@ const Item = ({
   title,
   pageid,
 }: {
-  snippet: any;
+  snippet: string;
   title: string;
   pageid: number;
 }) => {
