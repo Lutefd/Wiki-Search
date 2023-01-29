@@ -35,11 +35,7 @@ function App() {
           <img src={reactLogo} className="logo react" alt="React logo" />
         </a>
       </div>
-      <input
-        onChange={(e) => {
-          if (e !== undefined) handleChange(e.target.value, 500);
-        }}
-      ></input>
+      <input onChange={(e) => handleChange(e.target.value, 500)}></input>
       <h1>Vite + React</h1>
       <div className="card">
         {data.map((item: any, key) => {
