@@ -19,6 +19,7 @@ function App() {
         setData(data.query.search);
         setAmountOfPages(data.query.search.length / 10);
       });
+    setPage(0);
   };
   useEffect(() => {
     if (searchDebounced == '') return;
