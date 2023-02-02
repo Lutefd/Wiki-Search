@@ -3,12 +3,14 @@ import reactLogo from './assets/react.svg';
 import './App.css';
 import { useDebounce } from './useDebounce';
 import Item from './Item';
-import paginate from './utils/paginate';
-
+import Paginate from './utils/paginate';
+import { Constants } from './utils/constants';
 function App() {
+  const { delay } = Constants();
+
   const [search, setSearch] = useState('');
   const [page, setPage] = useState(0);
-  const { searchDebounced } = useDebounce(search, 500);
+  const { searchDebounced } = useDebounce(search, delay);
   const url = `https://en.wikipedia.org/w/api.php?action=query&list=search&srlimit=100&format=json&origin=*&srsearch=${searchDebounced}}`;
   const [data, setData] = useState([]);
   const [amountOfPages, setAmountOfPages] = useState(0);
@@ -50,10 +52,10 @@ function App() {
           <img src={reactLogo} className="logo react" alt="React logo" />
         </a>
       </div>
-      <input onChange={(e) => handleChange(e.target.value, 500)}></input>
+      <input onChange={(e) => handleChange(e.target.value, delay)}></input>
       <h1>Vite + React</h1>
       <div className="card">
-        {paginate(data, page).map((item: any, key) => {
+        {Paginate(data, page).map((item: any, key: any) => {
           return <Item key={key} {...item} />;
         })}
         {renderPaginationButtons()}
