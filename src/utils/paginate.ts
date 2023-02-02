@@ -1,6 +1,7 @@
-const paginate = (array: any[], currentPage: number) => {
-  const start = currentPage * 10;
-
-  return array.slice(start, start + 10);
+import { Constants } from './constants';
+const Paginate = (array: any[], currentPage: number) => {
+  const { elementsPerPage } = Constants();
+  const start = currentPage * elementsPerPage;
+  return array.slice(start, start + elementsPerPage);
 };
-export default paginate;
+export default Paginate;
